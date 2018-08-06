@@ -3,7 +3,7 @@ package com.nowcoder.model;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by nowcoder on 2016/7/3.
+ * Created by Huangsky on 2018/8/5.
  */
 @Component
 public class HostHolder {

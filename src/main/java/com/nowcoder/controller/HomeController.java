@@ -1,5 +1,6 @@
 package com.nowcoder.controller;
 
+import com.nowcoder.model.HostHolder;
 import com.nowcoder.model.Question;
 import com.nowcoder.model.ViewObject;
 import com.nowcoder.service.QuestionService;
@@ -28,6 +29,9 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HostHolder hostHolder;
 
     private List<ViewObject> getQuestions(int userId, int offset, int limit) {
         List<Question> questionList = questionService.getLatestQuestions(userId, offset, limit);
