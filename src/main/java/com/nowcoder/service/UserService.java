@@ -54,10 +54,9 @@ public class UserService {
         user.setName(username);
         user.setPassword(password);
         user.setSalt(UUID.randomUUID().toString().substring(0,5));
-
         user.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", new Random().nextInt(1000)));
-
         user.setPassword(WendaUtil.MD5(password+user.getSalt()));
+
         userDAO.addUser(user);
 
         String ticket = addLoginTicket(user.getId());

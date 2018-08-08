@@ -102,8 +102,6 @@ public class LoginController {
     public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
         return "redirect:/";
-
-
     }
 
 
