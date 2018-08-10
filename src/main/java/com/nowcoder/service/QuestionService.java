@@ -1,6 +1,5 @@
 package com.nowcoder.service;
 
-import com.nowcoder.controller.LoginController;
 import com.nowcoder.dao.QuestionDAO;
 import com.nowcoder.model.Question;
 import org.slf4j.Logger;
