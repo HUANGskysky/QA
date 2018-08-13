@@ -5,7 +5,9 @@ import java.util.Date;
 /**
  * Created by Huangsky on 2018/8/10.
  */
+
 public class Comment {
+
     private int id;
     private int userId;
     private int entityId;
@@ -69,4 +71,5 @@ public class Comment {
     public void setStatus(int status) {
         this.status = status;
     }
+
 }
