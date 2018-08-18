@@ -9,6 +9,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.*;
 
+import java.awt.*;
 import java.util.logging.Logger;
 
 /**
@@ -159,10 +160,21 @@ public class JedisAdapter implements InitializingBean{
        /* print(46,jedis.get("pv"));*/
 
         //jedis的连接池
-        JedisPool pool = new JedisPool();
+        /*JedisPool pool = new JedisPool();
         for (int i =0;i<100;i++){
             Jedis j = pool.getResource();
             print(46,j.get("pv"));
+            j.close();
+        }*/
+
+        Jedis jedis = new Jedis("redis://localhost:6379/8");
+        print(46,jedis.smembers("LIKE:0:1"));
+
+        JedisPool pool = new JedisPool("redis://localhost:6379/8");
+        for (int i =0;i<100;i++){
+            Jedis j = pool.getResource();
+            j.sadd("LIKE:0:1",String.valueOf(i));
+            print(46,j.smembers("LIKE:0:1"));
             j.close();
         }
 
@@ -183,7 +195,7 @@ public class JedisAdapter implements InitializingBean{
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        pool = new JedisPool("redis//localhost:6379/10");
+        pool = new JedisPool("redis://localhost:6379/10");
     }
 
     //增加
