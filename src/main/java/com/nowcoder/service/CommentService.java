@@ -44,4 +44,8 @@ public class CommentService {
         return commentDAO.getCommentCount(entityId,entityType);
     }
 
+    public Comment getCommentById(int id){
+        return commentDAO.getCommentById(id);
+    }
+
 }

@@ -1,5 +1,8 @@
 package com.nowcoder.controller;
 
+import com.nowcoder.async.EventModel;
+import com.nowcoder.async.EventProducer;
+import com.nowcoder.async.EventType;
 import com.nowcoder.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +29,9 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    EventProducer eventProducer;
 
     /*
     注册
@@ -73,7 +79,16 @@ public class LoginController {
             if (map.containsKey("ticket")){
                 Cookie cookie = new Cookie("ticket",map.get("ticket"));
                 cookie.setPath("/");
+                if (rememberme){
+                    cookie.setMaxAge(3600*24*5);
+                }
                 response.addCookie(cookie);
+
+               /* eventProducer.fireEvent(new EventModel(EventType.LOGIN)
+                        .setExts("username",username).setExts("email","1174480720@qq.com")
+                        .setActorId(Integer.parseInt(map.get("userId"))));*/
+
+
                 if (StringUtils.isNotBlank(next)){
                     return "redirect:"+next;
                 }

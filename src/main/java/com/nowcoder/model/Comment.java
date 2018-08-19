@@ -72,4 +72,16 @@ public class Comment {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", entityId=" + entityId +
+                ", entityType=" + entityType +
+                ", content='" + content + '\'' +
+                ", createdDate=" + createdDate +
+                ", status=" + status +
+                '}';
+    }
 }

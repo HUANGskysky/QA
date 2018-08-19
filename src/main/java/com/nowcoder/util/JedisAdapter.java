@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.*;
 
 import java.awt.*;
-import java.util.logging.Logger;
+import java.util.List;
 
 /**
  * Created by Huangsky on 2018/8/14.
@@ -260,6 +260,38 @@ public class JedisAdapter implements InitializingBean{
             }
         }
         return false;
+    }
+
+    //统计
+    public long lpush(String key,String value){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.lpush(key,value);
+        }catch (Exception e){
+            logger.error("发生异常："+e.getMessage());
+        }finally {
+            if (jedis != null){
+                jedis.close();
+            }
+        }
+        return 0L;
+    }
+
+
+    public List<String> brpop(int timeout, String key) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.brpop(timeout, key);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+        return null;
     }
 
 
