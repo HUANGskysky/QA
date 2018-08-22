@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by huangsky on 2018/7/2.
+ * Created by huangksy on 2018/8/6.
  */
 @Mapper
 public interface QuestionDAO {
@@ -21,12 +21,10 @@ public interface QuestionDAO {
     List<Question> selectLatestQuestions(@Param("userId") int userId, @Param("offset") int offset,
                                          @Param("limit") int limit);
 
-    @Select({"SELECT",SELECT_FIELDS,"FROM",TABLE_NAME,"Where id=#{id}"})
-    Question selectById(int qid);
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where id=#{id}"})
+    Question getById(int id);
 
-    @Update({"update ",TABLE_NAME,"set comment_count=#{count} where id=#{id}"})
-    public void updateCommentCount(@Param("id") int id,
-                                   @Param("count") int count);
-
+    @Update({"update ", TABLE_NAME, " set comment_count = #{commentCount} where id=#{id}"})
+    int updateCommentCount(@Param("id") int id, @Param("commentCount") int commentCount);
 
 }

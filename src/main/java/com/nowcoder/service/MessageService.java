@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Huangsky on 2018/8/13.
+ * Created by huangksy on 2018/8/6.
  */
-
 @Service
 public class MessageService {
 
@@ -20,22 +19,20 @@ public class MessageService {
     @Autowired
     SensitiveService sensitiveService;
 
-    public int addMessage(Message message){
+    public int addMessage(Message message) {
         message.setContent(sensitiveService.filter(message.getContent()));
-        return messageDAO.addMessage(message)>0?message.getId():0;
+        return messageDAO.addMessage(message) > 0 ? message.getId() : 0;
     }
 
-    public List<Message> getConversationDetail(String conversationId,int offset,int limit){
-        return messageDAO.getConversationDetail(conversationId,offset,limit);
+    public List<Message> getConversationDetail(String conversationId, int offset, int limit) {
+        return  messageDAO.getConversationDetail(conversationId, offset, limit);
     }
 
-    public List<Message> getConversationList(int userId,int offset,int limit){
-        return messageDAO.getConversationList(userId,offset,limit);
+    public List<Message> getConversationList(int userId, int offset, int limit) {
+        return  messageDAO.getConversationList(userId, offset, limit);
     }
 
-    public int getConversationUnreadCount(int userId,String conversationId){
-        return messageDAO.getConversationUnreadCount(userId,conversationId);
+    public int getConversationUnreadCount(int userId, String conversationId) {
+        return messageDAO.getConversationUnreadCount(userId, conversationId);
     }
-
-
 }

@@ -3,7 +3,7 @@ package com.nowcoder.service;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by nowcoder on 2016/7/10.
+ * Created by huangksy on 2018/8/6.
  */
 @Service
 public class WendaService {

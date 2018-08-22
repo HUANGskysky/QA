@@ -1,8 +1,6 @@
 package com.nowcoder.controller;
 
-import com.nowcoder.async.EventModel;
 import com.nowcoder.async.EventProducer;
-import com.nowcoder.async.EventType;
 import com.nowcoder.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,9 +41,9 @@ public class LoginController {
                       @RequestParam("password") String password,
                       HttpServletResponse response){
         try {
-            Map<String,String> map = userService.register(username,password);
+            Map<String,Object> map = userService.register(username,password);
             if (map.containsKey("ticket")){
-                Cookie cookie = new Cookie("ticket",map.get("ticket"));
+                Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 if (StringUtils.isNotBlank(next)){
@@ -75,9 +73,9 @@ public class LoginController {
                         @RequestParam(value = "rememberme",defaultValue = "false") boolean rememberme,
                         HttpServletResponse response){
         try {
-            Map<String,String> map = userService.login(username,password);
+            Map<String,Object> map = userService.register(username,password);
             if (map.containsKey("ticket")){
-                Cookie cookie = new Cookie("ticket",map.get("ticket"));
+                Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
                 cookie.setPath("/");
                 if (rememberme){
                     cookie.setMaxAge(3600*24*5);
