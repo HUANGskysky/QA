@@ -73,7 +73,7 @@ public class LoginController {
                         @RequestParam(value = "rememberme",defaultValue = "false") boolean rememberme,
                         HttpServletResponse response){
         try {
-            Map<String,Object> map = userService.register(username,password);
+            Map<String,Object> map = userService.login(username,password);
             if (map.containsKey("ticket")){
                 Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
                 cookie.setPath("/");
