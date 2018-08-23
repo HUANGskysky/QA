@@ -1,7 +1,6 @@
 package com.nowcoder.async;
 
 import com.alibaba.fastjson.JSON;
-import com.nowcoder.controller.QuestionController;
 import com.nowcoder.util.JedisAdapter;
 import com.nowcoder.util.RedisKeyUtil;
 import org.slf4j.Logger;
