@@ -25,6 +25,14 @@
 
 	<dependencies>
 
+		<!--导入解析solr的库-->
+
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>6.2.0</version>
+		</dependency>
+
 		<!--引入redis-->
 		<dependency>
 			<groupId>redis.clients</groupId>

@@ -20,6 +20,8 @@ import java.util.Date;
  */
 @Component
 public class PassportInterceptor implements HandlerInterceptor{
+
+
     @Autowired
     LoginTicketDAO loginTicketDAO;
 
@@ -41,7 +43,6 @@ public class PassportInterceptor implements HandlerInterceptor{
             }
 
         }
-
         if (ticket != null){
             LoginTicket loginTicket = loginTicketDAO.selectByTicket(ticket);
             if (loginTicket == null ||loginTicket.getExpired().before(new Date())||loginTicket.getStatus()!= 0){
@@ -67,4 +68,5 @@ public class PassportInterceptor implements HandlerInterceptor{
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
         hostHolder.clear();
     }
+
 }

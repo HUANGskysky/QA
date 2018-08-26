@@ -1,5 +1,8 @@
 package com.nowcoder.controller;
 
+import com.nowcoder.async.EventModel;
+import com.nowcoder.async.EventProducer;
+import com.nowcoder.async.EventType;
 import com.nowcoder.model.*;
 import com.nowcoder.service.*;
 import com.nowcoder.util.WendaUtil;
@@ -41,6 +44,9 @@ public class QuestionController {
 
     @Autowired
     LikeService likeService;
+
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(value = "/question/{qid}", method = {RequestMethod.GET})
     public String questionDetail(Model model, @PathVariable("qid") int qid) {
@@ -104,6 +110,10 @@ public class QuestionController {
                 question.setUserId(hostHolder.getUser().getId());
             }
             if (questionService.addQuestion(question) > 0) {
+
+                eventProducer.fireEvent(new EventModel(EventType.ADD_QUESTION).
+                setActorId(question.getUserId()).setEntityId(question.getId())
+                .setExts("title",question.getTitle()).setExts("content",question.getContent()));
                 return WendaUtil.getJSONString(0);
             }
         } catch (Exception e) {
