@@ -1,6 +1,6 @@
 # QA
-基于Spring Boot框架的仿Stack Overflow的问答社区
-内容：
+基于Spring Boot框架的仿Stack Overflow的问答社区  
+内容：  
   1 开发工具Git，IntelliJ  
   2 Spring Boot,Velocity  
   3 myBatis  
