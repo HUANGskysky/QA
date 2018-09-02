@@ -32,7 +32,6 @@ public class AddQuestionHandler implements EventHandler{
         }catch (Exception e){
             logger.error("增加题目索引失败");
         }
-
     }
 
     @Override
