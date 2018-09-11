@@ -1,3 +1,42 @@
+1.登录注册问题
+    1） 注册 (LoginController.reg())
+        userService.register（username,password）:
+        1.1 检测待注册的用户名和密码是否为空，为空则返回map提示
+        1.2 检测用户名是否已经被注册了
+        1.3 创建User，利用UUID创建长度为5的salt，使用MD5加密（密码+salt）
+        1.4 利用userId创建一个ticket
+
+        1.5 在map中提取键“ticket”所对应的值
+        1.6 根据上面提取出来的键值对创建一个cookie并返回response.addCookie(cookie)
+
+    2） 登录(LoginController.login())
+        userService.login（username,password）
+        2.1 检测待注册的用户名和密码是否为空
+        2.2 检测用户名是否存在，检测密码是否正确，若否，则返回
+        2.3 创建Ticket ticket
+        2.4 利用ticket作为值创建Cookie返回给客户端
+
+
+    3） 拓展
+        3.1 Cookie和Session
+            3.1.1 因为HTTP协议是一种无状态的协议，所以需要使用Cookie/Session进行会话跟踪
+            3.1.2 Cookie是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器之后向同一个服务器在此发起请求被携带上，
+                  用于告知服务器端两个请求是否来自同一个浏览器
+            3.1.3 除了可以将用户信息通过Cookie存储在客户端，也可以利用Session存储在服务器端，存储在服务器端的信息更加安全
+            3.1.4 本项目正是采用这种方式，用户在注册/登录之后都会创建一个ticket作为SessionId
+            3.1.5 本项目维护用户登录状态的过程如下：
+                  用户登录时，用户提交包含用户名和密码的表单，放入HTTP请求报文中；
+                  服务器验证该用户名和密码
+                  如果正确则创建Ticket，该ticket会关联userId，创建Cookie字段
+                  服务器返回的响应报文的Set-Cookie首部字段包含了这个ticket返回给客户端
+                  之后客户端每次向服务器发起请求时都会包含这个Cookie值，在服务器响应之前会首先被拦截器拦截，根据ticket获得用户信息。
+        3.2 用户数据安全性
+            本项目使用的
+            3.2.1 不存放明文密码在数据库，通过salt加密用户密码，但是加盐也有泄露的可能。
+
+
+
+
 1.基于redis的消息队列
     常用的消息队列有RabbitMQ,ActiveMQ,Kafka等，这些都是开源的功能强大的消息队列，适合在企业项目中应用。
 
@@ -62,6 +101,9 @@
        2） 执行要测试的业务
        3） 验证测试的数据
        4） 清理数据
+
+
+
 
 
 
