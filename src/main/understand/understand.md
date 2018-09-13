@@ -3,11 +3,11 @@
         userService.register（username,password）:
         1.1 检测待注册的用户名和密码是否为空，为空则返回map提示
         1.2 检测用户名是否已经被注册了
-        1.3 创建User，利用UUID创建长度为5的salt，使用MD5加密（密码+salt）
-        1.4 利用userId创建一个ticket
+        1.3 创建User，利用UUID创建长度为5的salt，使用MD5加密（密码+salt）  
+        1.4 利用userId创建一个ticket  
 
-        1.5 在map中提取键“ticket”所对应的值
-        1.6 根据上面提取出来的键值对创建一个cookie并返回response.addCookie(cookie)
+        1.5 在map中提取键“ticket”所对应的值  
+        1.6 根据上面提取出来的键值对创建一个cookie并返回response.addCookie(cookie)  
 
     2） 登录(LoginController.login())
         userService.login（username,password）
@@ -52,8 +52,8 @@
               2） 对输入的文本按照trie树的单个字符进行一次对比，若相等，则输入文本和树都向下移动，直到不相等
               3） 当全部相等，则从根节点开始对下一个字符重新比较
     2.2 与KMP比较的优势：
-
-
+        2.2.1 时间复杂度
+        2.2.2 内容的可扩展性
 
 3. Mybatis
     3.1 Mybatis中#和$和有什么区别
@@ -67,6 +67,7 @@
         3.2.3 通过 sqlsession 执行数据库操作
         3.2.4 调用 session.commit()提交事务
         3.2.5 调用 session.close()关闭会话
+        
 4. SpringMVC
      4.1 SpringMVC执行流程，见图SpringMVC.png
      4.2 SpringMVC集成了Ajax，只需一个注解@ResponseBody，然后直接返回响应文本即可
@@ -99,6 +100,22 @@
     redis的事务概念：
         基本事务的实现用到命令multi和exec，这种事务可以让一个客户端在不被其他客户端打断执行多个命令，和关系型数据库那种可以在执行过程中进行回滚的事务不同，
         在redis中，被mutli命令和exec命令包围的所有命令会一个接一个地执行，知道所有的命令都执行完毕为止，当一个事务执行完毕之后，redis才会处理其他客户端的命令。
+        
+     
+    设计消息队列的原因：为了更快地把结果返回给用户
+    完善：优先消息队列，根据任务的轻重优先级，优先响应那些紧急的任务
+    框架组成：消息的产生、消息的处理、事件模型的定义
+        
+     Redis的特点优势：
+     Redis是一个key-value的非关系型内存数据库，处理速度非常快
+     支持五种数据类型：String、Set、List、hashmap、zset,而Memcached仅仅支持String类型
+     持久化：Redis通过RDB和AOF持久化，而Memcached不支持持久化
+     
+     Redis的应用场景：
+     计数器
+     缓存（淘汰策略）
+     消息队列
+     会话缓存
 
   2. 拦截器（2个）：
                登录拦截：判断用户是否在登录的状态，如果不是重定向至登录的页面
