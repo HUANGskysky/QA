@@ -1,24 +1,24 @@
-1.登录注册问题
-    1） 注册 (LoginController.reg())
-        userService.register（username,password）:
-        1.1 检测待注册的用户名和密码是否为空，为空则返回map提示
-        1.2 检测用户名是否已经被注册了
-        1.3 创建User，利用UUID创建长度为5的salt，使用MD5加密（密码+salt）  
-        1.4 利用userId创建一个ticket  
+1.登录注册问题  
+    1） 注册 (LoginController.reg())  
+        userService.register（username,password）:  
+        1.1 检测待注册的用户名和密码是否为空，为空则返回map提示  
+        1.2 检测用户名是否已经被注册了  
+        1.3 创建User，利用UUID创建长度为5的salt，使用MD5加密（密码+salt）    
+        1.4 利用userId创建一个ticket    
 
-        1.5 在map中提取键“ticket”所对应的值  
-        1.6 根据上面提取出来的键值对创建一个cookie并返回response.addCookie(cookie)  
+        1.5 在map中提取键“ticket”所对应的值    
+        1.6 根据上面提取出来的键值对创建一个cookie并返回response.addCookie(cookie)    
 
-    2） 登录(LoginController.login())
-        userService.login（username,password）
-        2.1 检测待注册的用户名和密码是否为空
-        2.2 检测用户名是否存在，检测密码是否正确，若否，则返回
-        2.3 创建Ticket ticket
-        2.4 利用ticket作为值创建Cookie返回给客户端
+    2） 登录(LoginController.login())  
+        userService.login（username,password）  
+        2.1 检测待注册的用户名和密码是否为空  
+        2.2 检测用户名是否存在，检测密码是否正确，若否，则返回  
+        2.3 创建Ticket ticket  
+        2.4 利用ticket作为值创建Cookie返回给客户端  
 
 
-    3） 拓展
-        3.1 Cookie和Session
+    3） 拓展  
+        3.1 Cookie和Session  
             3.1.1 因为HTTP协议是一种无状态的协议，所以需要使用Cookie/Session进行会话跟踪
             3.1.2 Cookie是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器之后向同一个服务器在此发起请求被携带上，
                   用于告知服务器端两个请求是否来自同一个浏览器
@@ -47,37 +47,37 @@
                   7） SSO认证中心检验令牌合法，返回有效，注册系统1
                   8） 系统1创建与用户的会话，称为局部会话，返回用户请求的资源
 
-2. 前缀树（时间复杂度O（n））
-    2.1 思想：1） 载入敏感词文件，构造敏感词trie树
-              2） 对输入的文本按照trie树的单个字符进行一次对比，若相等，则输入文本和树都向下移动，直到不相等
-              3） 当全部相等，则从根节点开始对下一个字符重新比较
-    2.2 与KMP比较的优势：
-        2.2.1 时间复杂度
-        2.2.2 内容的可扩展性
+2. 前缀树（时间复杂度O（n））  
+    2.1 思想：1） 载入敏感词文件，构造敏感词trie树  
+              2） 对输入的文本按照trie树的单个字符进行一次对比，若相等，则输入文本和树都向下移动，直到不相等  
+              3） 当全部相等，则从根节点开始对下一个字符重新比较  
+    2.2 与KMP比较的优势：  
+        2.2.1 时间复杂度  
+        2.2.2 内容的可扩展性  
 
-3. Mybatis
-    3.1 Mybatis中#和$和有什么区别
-        3.1.1 #相当于对数据 加上 双引号， $相当于直接显示数据
-        3.1.2 sql注入:. #方式能够很大程度防止 sql 注入,$方式无法防止sql注入
-        3.1.3 $方式一般用于传入数据库对象，例如传入表名
-        3.1.4 一般能用#的就别用$
-    3.2 Mybatis的编程步骤（与JDBC繁琐的过程比较）
-        3.2.1 创建 SqlSessionFactory
-        3.2.2 通过 SqlSessionFactory 创建 SqlSession
-        3.2.3 通过 sqlsession 执行数据库操作
-        3.2.4 调用 session.commit()提交事务
-        3.2.5 调用 session.close()关闭会话
+3. Mybatis  
+    3.1 Mybatis中#和$和有什么区别  
+        3.1.1 #相当于对数据 加上 双引号， $相当于直接显示数据  
+        3.1.2 sql注入:. #方式能够很大程度防止 sql 注入,$方式无法防止sql注入  
+        3.1.3 $方式一般用于传入数据库对象，例如传入表名  
+        3.1.4 一般能用#的就别用$  
+    3.2 Mybatis的编程步骤（与JDBC繁琐的过程比较）  
+        3.2.1 创建 SqlSessionFactory  
+        3.2.2 通过 SqlSessionFactory 创建 SqlSession  
+        3.2.3 通过 sqlsession 执行数据库操作  
+        3.2.4 调用 session.commit()提交事务  
+        3.2.5 调用 session.close()关闭会话  
         
-4. SpringMVC
-     4.1 SpringMVC执行流程，见图SpringMVC.png
-     4.2 SpringMVC集成了Ajax，只需一个注解@ResponseBody，然后直接返回响应文本即可
-     4.3 MVC分别的含义：model(模型)、view(视图)、controller(控制器)，代码解耦，易于维护和开发
+4. SpringMVC  
+     4.1 SpringMVC执行流程，见图SpringMVC.png  
+     4.2 SpringMVC集成了Ajax，只需一个注解@ResponseBody，然后直接返回响应文本即可  
+     4.3 MVC分别的含义：model(模型)、view(视图)、controller(控制器)，代码解耦，易于维护和开发  
 
 
 
 
 
-1.基于redis的消息队列
+1.基于redis的消息队列  
     常用的消息队列有RabbitMQ,ActiveMQ,Kafka等，这些都是开源的功能强大的消息队列，适合在企业项目中应用。
 
     Redis实现消息队列提供了两种方式：
@@ -117,46 +117,46 @@
      消息队列
      会话缓存
 
-  2. 拦截器（2个）：
-               登录拦截：判断用户是否在登录的状态，如果不是重定向至登录的页面
-               设置HostHolder：拦截用户的cookie，通过cookie来获取用户，并把该用户添加至HostHolder，用以全局
+  2. 拦截器（2个）：  
+               登录拦截：判断用户是否在登录的状态，如果不是重定向至登录的页面  
+               设置HostHolder：拦截用户的cookie，通过cookie来获取用户，并把该用户添加至HostHolder，用以全局  
 
-               拦截器的执行流程：
+               拦截器的执行流程：  
                在request被响应之前->prHandle->request被响应之后和视图渲染之前->postHandle->以及request全部结束之后->afterCompletion
 
                实现自定义拦截器只需要3步：
-        1、创建我们自己的拦截器类并实现 HandlerInterceptor 接口。
-        2、创建一个Java类继承WebMvcConfigurerAdapter，并重写 addInterceptors 方法。
-        2、实例化我们自定义的拦截器，然后将对像手动添加到拦截器链中（在addInterceptors方法中添加）。
+        1、创建我们自己的拦截器类并实现 HandlerInterceptor 接口。  
+        2、创建一个Java类继承WebMvcConfigurerAdapter，并重写 addInterceptors 方法。  
+        2、实例化我们自定义的拦截器，然后将对像手动添加到拦截器链中（在addInterceptors方法中添加）。  
 
 
-  3. ThreadLocal的使用
+  3. ThreadLocal的使用  
 
 
-  4. 数据库的安全性
-        1）不写明文的密码，使用MD5加密，使用salt
-        2）
+  4. 数据库的安全性  
+        1）不写明文的密码，使用MD5加密，使用salt  
+        2）  
 
 
 
   5. solr
      步骤：
-        1）建立索引：加入索引的字段，并标明索引类型（在managed-schema文件配置 ）
-        2）建立中文分词器（在managed-schema文件配置 ）
-        3）配置文件solr-data-config.xml，建立solr与mysql数据库的连接，数据库与刚才步骤1建立的索引字段关联
-        4）从数据库中导入question内容（配置solrconfig.xml）
+        1）建立索引：加入索引的字段，并标明索引类型（在managed-schema文件配置 ）  
+        2）建立中文分词器（在managed-schema文件配置 ）  
+        3）配置文件solr-data-config.xml，建立solr与mysql数据库的连接，数据库与刚才步骤1建立的索引字段关联  
+        4）从数据库中导入question内容（配置solrconfig.xml）  
 
 
       使用solr的好处：
-        1）如果不使用solr其实也可以通过sql语句的模糊搜索"like"，但是这达不到分词的效果，所以使用solr可以达到分词的效果？
+        1）如果不使用solr其实也可以通过sql语句的模糊搜索"like"，但是这达不到分词的效果，所以使用solr可以达到分词的效果？  
 
 
 
-   6. 单元测试
-       1） 初始化数据
-       2） 执行要测试的业务
-       3） 验证测试的数据
-       4） 清理数据
+   6. 单元测试  
+       1） 初始化数据  
+       2） 执行要测试的业务  
+       3） 验证测试的数据  
+       4） 清理数据  
 
 
 
